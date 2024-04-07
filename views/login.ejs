@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="./styles/login.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="welcome-text">
+        <p>Welcome Again</p>
+        <h1>Keep track of your</h1>
+        <h1><span>Expenses</span>. </h1>
+      </div>
+      <div class="login">
+        <h1>Log in</h1>
+        <div class="login-box">
+          <form action="/login" method="POST">
+            <div class="user-box">
+              <input type="email" name="username" required="">
+              <label>Email</label>
+            </div>
+            <div class="user-box">
+              <input type="password" name="password" required="">
+              <label>Password</label>
+            </div>
+            <p>Not a member?</p>
+            <div class="signup">
+              <button type="submit" class="btn">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                submit
+              </button>
+              <a href="/signup" class="btn">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Sign up
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  // document.querySelector('form').addEventListener('submit', function (event) {
+  //   event.preventDefault(); // Make sure this is not preventing the form submission
+  //   // Your other JavaScript logic...
+  // });
+
+</script>
+
+</html>

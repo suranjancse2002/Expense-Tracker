@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="./styles/signup.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="welcome-text">
+        <p>JOIN FOR FREE</p>
+        <h1>Keep your</h1>
+        <h1><span>Expenses</span> managed</h1>
+      </div>
+      <div class="login">
+        <h1>Create new account</h1>
+        <div class="login-box">
+          <form action="/signup" method="POST">
+            <div class="user-box">
+              <input type="text" name="username" required="">
+              <label>Username</label>
+            </div>
+            <div class="user-box">
+              <input type="email" name="email" required="">
+              <label>Email</label>
+            </div>
+            <div class="user-box">
+              <input type="password" name="password" required="">
+              <label>Password</label>
+            </div>
+            <p>Already a member?</p>
+            <div class="signup">
+              <button type="submit" class="btn">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                submit
+              </button>
+              <a href="/login" class="btn">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                log in
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

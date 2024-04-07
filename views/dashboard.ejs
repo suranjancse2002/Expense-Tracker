@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./styles/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="menu">
+            <div class="menu-box">
+                <div class="profile">
+                    <!-- <img src="./images/suranjan.jpg" alt=""> -->
+                    <img src="/profileimage" alt="">
+
+                </div>
+                <h2>
+                    <%= username.username %>
+                </h2>
+                <div class="profile-box">
+                    <a href="/monthly-report-download/<%= username.id %>"><span><i
+                                class="fa-solid fa-cloud-arrow-down"></i></span>&nbsp Expenses</a>
+                    <a href="/set-budget"><span><i class="fa-solid fa-pen"></i></span>&nbsp Set Budget</a>
+                    <a href="/editprofile"><span><i class="fa-solid fa-heart"></i></span>&nbsp Edit Profile</a>
+                    <a href="/logout" class="logout-link">LOG OUT</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="head-space-left">
+            <%if(locals.budget.length> 0){%>
+                <p class="budget">Your Budget is Rs. <%= budget[0].budget %>
+                </p>
+                <%}else{%>
+                    <p class="budget">Your Budget is not set</p>
+                    <%}%>
+                        <p>Your expenses till now</p>
+                        <p class="percentage" style="left: 47%;" id="percentage">
+                            <%= percentage %>%
+                        </p>
+                        <div class="progress-bar" style="width: <%= percentage %>%;"></div>
+                        <div class="progress-bar-track"></div>
+        </div>
+        <div class="head-space-right">
+            <a href="#" class="notification"><i class="fa-solid fa-bell"></i></a>
+            <div class="alert hide">
+                <span class="fas fa-exclamation-circle"></span>
+                <span class="msg">You have spent 50% of your budget!</span>
+                <div class="close-btn">
+                    <span class="fas fa-times"></span>
+                </div>
+            </div>
+            <a href="/inputform" class="btn"><i class="fa-solid fa-plus"></i>&nbsp Add expenses</a>
+        </div>
+        <div class="content">
+            <div class="dropdown-container">
+                <div class="left-right-arrow">
+                    <span><i class="fa-solid fa-arrow-left"></i></span>
+                    <span><i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+                <div class="dropdown dropdown-right">
+                    <select id="inputFormTags">
+                        <option>All</option>
+                        <option>Personal</option>
+                        <option>Business</option>
+                        <option>Family</option>
+                    </select>
+                </div>
+            </div>
+            <div class="item-container">
+                <%if(locals.userExpense.length> 0){%>
+                    <% userExpense.forEach( expense=> {%>
+                        <div class="item-box">
+                            <div class="first-section">
+                                <div class="category" id="category">
+                                    <%= expense.category %>
+                                </div>
+                                <div class="first-section-inner">
+                                    <div class="payment" id="payment">
+                                        <%= expense.payment_method %>
+                                    </div>
+                                    <div class="tag" id="tag">
+                                        <%= expense.tag %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="amount" id="amount">
+                                <%= expense.amount %>
+                            </div>
+                            <div class="description" id="description">
+                                <%= expense.description %>
+                            </div>
+                            <% const formattedDate=new Date(expense.date).toLocaleDateString('en-US', { day: 'numeric' ,
+                                month: 'short' , year : 'numeric' }) %>
+                                <div class="date" id="date">
+                                    <%= formattedDate %>
+                                </div>
+                                <div class="last-section">
+                                    <a href="/update/<%= expense.id %>" class="btn"><i class="fa-solid fa-pen"></i>&nbsp
+                                        Edit</a>
+                                    <a href="/image/<%= expense.id %>" class="btn"><i
+                                            class="fa-solid fa-image"></i>&nbsp Receipt</a>
+                                </div>
+                        </div>
+                        <% }) %>
+                            <% }else{ %>
+                                Nothing to show
+                                <%}%>
+
+            </div>
+        </div>
+        <div class="chart">
+            <div id="container" style="width: 100%; height: 100% "></div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-pie.min.js"></script>
+<script src="/pie-chart.js"></script>
+<script src="/pagination.js"></script>
+<script>
+    var chartData = '<%- JSON.stringify(userExpense) %>'
+    // function handleImageError(img) {
+    //     img.src = "./images/suranjan.jpg"
+    //     img.alt = 'Image not found';
+    // }
+    var userId = '<%-username.id %>'
+    if(parseInt(document.getElementById('percentage').innerText) > 50){
+        $('.alert').addClass("show");
+        $('.alert').removeClass("hide");
+        $('.alert').addClass("showAlert");
+        setTimeout(function () {
+            $('.alert').removeClass("show");
+            $('.alert').addClass("hide");
+        }, 5000);
+    };
+    $('.close-btn').click(function () {
+        $('.alert').removeClass("show");
+        $('.alert').addClass("hide");
+    });
+</script>
+
+</html>

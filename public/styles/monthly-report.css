@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 20px;
+}
+
+.para {
+    margin-top: 40px;
+    padding-left: 15px;
+}
+
+h6 {
+    padding-left: 15px;
+}
+
+.container {
+    height: 500px;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.container-flex{
+    display: flex;
+    flex-direction: row;
+}

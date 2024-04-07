@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Form</title>
+    <link rel="stylesheet" href="./styles/inputform.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="login">
+                <h1>Add profile image</h1>
+                <div class="login-box">
+                    <form action="/editprofile" method="post" encType="multipart/form-data">
+                        <div class="items">
+                            <div class="user-box" style="width: 550px;">
+                                <input type="file" name="inputFormFile" required="" placeholder="" class="custom-file-input">
+                            </div>
+                        </div>
+                        <div class="signup">
+                            <button type="submit" class="btn">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                submit
+                              </button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
