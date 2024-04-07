@@ -1,0 +1,1 @@
+It's an Expense Trcaker Website made with HTML, CSS, Javascript, Node Js, Express Js, PostgreSQL. This website helps to track monthly expenses according to different categories. Also it gives visual representation using Pie chart of expenses.
